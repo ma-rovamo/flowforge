@@ -9,6 +9,7 @@ import MermaidRenderer from "./gen/MermaidRenderer";
 import { cn } from "@/lib/utils";
 import { Textarea } from "./ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import Link from "next/link";
 
 export default function DiagramEditor({ diagram }: { diagram: { id: string; prompt: string; diagram: string } }) {
   const [prompt, setPrompt] = useState(diagram.prompt);
@@ -98,9 +99,11 @@ export default function DiagramEditor({ diagram }: { diagram: { id: string; prom
             </div>
             {(!sidebarCollapsed || isMobile) && (
               <div className="min-w-0">
+                <Link href="/" className="flex items-center gap-2">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                   Diagram Studio
                 </h2>
+                </Link>
                 <p className="text-sm text-slate-500 dark:text-slate-400">
                   Create stunning diagrams with AI
                 </p>

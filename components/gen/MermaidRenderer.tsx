@@ -633,14 +633,14 @@ export default function MermaidRenderer({ response, theme: propTheme, title }: P
   }, [isFullscreen, handleZoom, handleReset]);
 
   return (
-    <div className={`mt-6 ${isFullscreen ? 'fixed inset-0 z-50' : 'rounded-xl border border-border'} shadow-lg overflow-hidden transition-all duration-300 bg-background`}>
+    <div className={`mt-6 ${isFullscreen ? 'fixed inset-0 z-50' : 'rounded-xl '}  overflow-hidden transition-all `}>
       {/* Header */}
-      <div className="bg-muted/50 p-4 border-b border-border">
+      <div className=" p-4 ">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            {/* <div className="w-3 h-3 bg-red-500 rounded-full"></div>
             <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div> */}
             <h3 className="text-sm font-semibold text-foreground ml-4">
               {title || 'Diagram Preview'}
             </h3>

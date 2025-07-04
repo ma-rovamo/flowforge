@@ -7,8 +7,10 @@ import { generateContent } from "@/lib/actions/gemin";
 import MermaidRenderer from "./MermaidRenderer";
 import { Loader2, Send, Sparkles, RefreshCw } from "lucide-react";
 import { Textarea } from "../ui/textarea";
+import { useRouter } from "next/navigation";
 
 const FormCard = () => {
+	const router = useRouter();
 	const [prompt, setPrompt] = React.useState("");
 	const [response, setResponse] = React.useState<any | string>("");
 	const [isLoading, setIsLoading] = React.useState(false);
@@ -26,17 +28,17 @@ const FormCard = () => {
 			setIsLoading(true);
 			setError(null);
 			const res = await generateContent(prompt);
-
-			if (!res) {
+			const id = res.data?.id;
+			if (res.success) {
+				setResponse(res.data?.diagram);
+				router.push(`/diagrams/${id}`);
+			} else {
 				throw new Error("Failed to generate diagram");
 			}
-
-			setResponse(res.data?.diagram);
 		} catch (err) {
 			setError(
 				err instanceof Error ? err.message : "An unexpected error occurred"
 			);
-			console.error(err);
 		} finally {
 			setIsLoading(false);
 		}
@@ -55,7 +57,7 @@ const FormCard = () => {
 	return (
 		<div className="w-full max-w-4xl mx-auto px-4 py-8">
 			<div className="space-y-8">
-				<div className="text-center space-y-2">
+				{/* <div className="text-center space-y-2">
 					<h1 className="text-3xl font-bold tracking-tight">
 						Mermaid Diagram Generator
 					</h1>
@@ -63,10 +65,10 @@ const FormCard = () => {
 						Describe what you want to visualize, and we'll generate a diagram
 						for you
 					</p>
-				</div>
+				</div> */}
 
 				{/* Results */}
-				{response && <MermaidRenderer response={response} />}
+				{/* {response && <MermaidRenderer response={response} />} */}
 				{/* Input Form */}
 				<div>
 					<form onSubmit={handleSubmit} className="p-4 space-y-4">

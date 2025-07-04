@@ -27,24 +27,24 @@ export default function MainHeader() {
 			<div className="container flex h-16 items-center justify-between px-4 md:px-6">
 				<Link href="/" className="flex items-center space-x-2">
 					<span className="relative z-10 text-2xl font-black tracking-tighter">
-						<span className="bg-gradient-to-r from-red-600 via-rose-500 to-orange-500 bg-clip-text text-transparent">
-							L
+						<span className="bg-gradient-to-r from-blue-600 via-blue-500 to-orange-500 bg-clip-text text-transparent">
+							D
 						</span>
-						<span className="bg-gradient-to-r from-rose-500 via-red-500 to-rose-600 bg-clip-text text-transparent">
-							inkify
+						<span className="bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600 bg-clip-text text-transparent">
+							iagram
 						</span>
 						{/* Decorative Elements */}
-						<span className="absolute -right-1.5 -top-1.5 h-2 w-2 animate-ping rounded-full bg-gradient-to-r from-red-500 to-orange-500 opacity-75" />
-						<span className="absolute -right-1.5 -top-1.5 h-2 w-2 rounded-full bg-gradient-to-r from-red-500 to-orange-500 shadow-md" />
+						<span className="absolute -right-1.5 -top-1.5 h-2 w-2 animate-ping rounded-full bg-gradient-to-r from-blue-500 to-blue-500 opacity-75" />
+						<span className="absolute -right-1.5 -top-1.5 h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-500 shadow-md" />
 					</span>
 				</Link>
 				<nav className="hidden gap-6 md:flex justify-center  items-center">
-					<Link
+					{/* <Link
 						href="/generate"
 						className="text-sm text-gray-500 dark:text-white font-medium hover:text-primary">
 						Generate
-					</Link>
-					<Link
+					</Link> */}
+					{/* <Link
 						href="/about"
 						className="text-sm text-gray-500 dark:text-white font-medium hover:text-primary">
 						About
@@ -58,10 +58,15 @@ export default function MainHeader() {
 						href="#faq"
 						className="text-sm text-gray-500 dark:text-white font-medium hover:text-primary">
 						FAQ
-					</Link>
+					</Link> */}
 				</nav>
 				<div className="md:flex items-center justify-center gap-4 sm:block hidden">
-					<UserDropDown />
+					{/* <UserDropDown /> */}
+						<Link
+						href="/generate"
+						className="text-sm text-gray-500 dark:text-white font-medium hover:text-primary">
+						All Chats
+					</Link> 
 					<ModeToggle />
 				</div>
 				<Sheet>
@@ -75,7 +80,7 @@ export default function MainHeader() {
 							<Link href="/generate" className="text-sm font-medium">
 								Generate
 							</Link>
-							<Link href="/about" className="text-sm font-medium">
+							{/* <Link href="/about" className="text-sm font-medium">
 								About
 							</Link>
 							<Link href="#testimonials" className="text-sm font-medium">
@@ -83,7 +88,7 @@ export default function MainHeader() {
 							</Link>
 							<Link href="#faq" className="text-sm font-medium">
 								FAQ
-							</Link>
+							</Link> */}
 						</nav>
 					</SheetContent>
 				</Sheet>

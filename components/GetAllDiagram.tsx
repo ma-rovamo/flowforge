@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { getALLDiagram } from "@/lib/actions/gemin";
-import MermaidRenderer from "./gen/MermaidRenderer";
+import { truncateText } from "@/lib/utils";
 
 type Diagram = {
   id: string;
@@ -53,25 +53,18 @@ export default function AllDiagrams() {
       {diagrams.map((diagram) => (
         <div
           key={diagram.id}
-          className="border rounded-xl p-4 hover:shadow-lg transition-all"
+          className=""
         >
              <Link
-              href={`/diagram/${diagram.id}`}
+              href={`/diagrams/${diagram.id}`}
               className="text-sm text-blue-500 hover:underline"
             >
 
           <h2 className="text-sm font-medium mb-2 text-muted-foreground">
-            {diagram.prompt}
+          <p>{truncateText(diagram.prompt, 24)}</p>
+
           </h2>
             </Link>
-          <div className="text-right mt-2">
-            <Link
-              href={`/diagram/${diagram.id}`}
-              className="text-sm text-blue-500 hover:underline"
-            >
-              View Diagram →
-            </Link>
-          </div>
         </div>
       ))}
     </div>
