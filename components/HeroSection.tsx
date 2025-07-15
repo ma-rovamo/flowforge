@@ -329,8 +329,8 @@ const HeroSection: React.FC = () => {
                     )}
                   </div>
 
-                  <div className="flex gap-2">
-                    {/* <div className="flex-1 relative">
+                  {/* <div className="flex gap-2">
+                    <div className="flex-1 relative">
                       <input
                         type="text"
                         placeholder="Describe your flowchart..."
@@ -338,11 +338,11 @@ const HeroSection: React.FC = () => {
                         onChange={(e) => setCurrentMessage(e.target.value)}
                         className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
-                    </div> */}
+                    </div>
                     <Button size="sm" className="px-3">
                       <Send className="w-4 h-4" />
                     </Button>
-                  </div>
+                  </div> */}
                 </Card>
 
                 {/* Flowchart Visualization */}
