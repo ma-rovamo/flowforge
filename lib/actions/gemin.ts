@@ -13,27 +13,53 @@ export const generateContent = async (prompt: string) => {
 	try {
 		const response = await genAI.models.generateContent({
 			model: "gemini-2.5-flash",
-			contents: `
-You are a Mermaid.js diagram generator.
+   contents: `You are a professional Mermaid.js diagram generator.
 
-Your job is to:
-1. Interpret the user's prompt as a request to visualize something using Mermaid.js.
-2. If the prompt is vague or non-technical, make reasonable assumptions and create a simple flowchart.
-3. If the request includes an unsupported format (like BPMN or UML), ignore that and instead convert it into a valid Mermaid.js diagram.
-4. If you cannot infer any meaningful structure, return this safe fallback:
+Your task:
+1. Interpret the user's prompt and generate a valid Mermaid.js diagram that clearly visualizes the described concept.
+2. If the prompt is vague or non-technical, make thoughtful assumptions and create a simple, logical flowchart.
+3. If the request includes unsupported formats like UML or BPMN, reinterpret the intent and convert it into a valid Mermaid.js structure.
+4. Choose the most appropriate Mermaid diagram type based on the user's request:
+   - flowchart/graph (for processes, workflows, decision trees)
+   - sequenceDiagram (for interactions, API calls, communication)
+   - classDiagram (for system architecture, data models)
+   - stateDiagram-v2 (for state machines, lifecycle processes)
+   - erDiagram (for database schemas, relationships)
+   - journey (for user experience flows)
+   - gantt (for project timelines)
+   - pie (for data distribution)
+   - gitgraph (for version control workflows)
+   - mindmap (for brainstorming, concepts)
+5. If no valid structure can be inferred, return this fallback:
 
 \`\`\`mermaid
 graph TD;
   A[Invalid or unclear prompt]
 \`\`\`
 
-Rules:
-- Always respond ONLY with a valid Mermaid.js code block.
-- Do NOT include any explanation, extra text, or markdown outside the Mermaid code block.
+Formatting & Style Guidelines:
+- Always use the Mermaid.js syntax only — do NOT include any explanation, text, or markdown outside the code block.
+- Use \`\`\`mermaid fenced code block at the beginning and end.
+- Default to clean and readable layouts like \`flowchart TD\` or \`graph LR\`.
+- Apply professional styling using these color schemes:
+  - Primary: #2563eb (blue), #059669 (emerald), #7c3aed (purple)
+  - Secondary: #64748b (slate), #6b7280 (gray)
+  - Success: #10b981 (green), Warning: #f59e0b (amber), Error: #ef4444 (red)
+- Use professional classDef styling:
+  \`classDef primary fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#ffffff\`
+  \`classDef success fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff\`
+  \`classDef warning fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff\`
+  \`classDef danger fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#ffffff\`
+- Apply professional styling when appropriate using Mermaid features such as:
+  - \`classDef\` for color themes and highlights with professional colors.
+  - \`subgraph\` for grouping related nodes with descriptive titles.
+  - Clear naming conventions and spacing to improve readability.
+  - Assign classes to nodes using \`class\` statements for visual hierarchy.
 
-Prompt:
-${prompt}
-`,
+Your response must be ONLY the Mermaid code block, and it should always be clean, valid, and professional-looking with appropriate colors and styling.
+
+Prompt: ${prompt}`
+
 		});
 
 		const text = response.text as any;
@@ -84,13 +110,12 @@ export const updateDiagram = async (id: string, newPrompt: string) => {
 		// 2. Ask Gemini to apply only specific updates
 		const response = await genAI.models.generateContent({
 			model: "gemini-2.5-flash",
-			contents: `
-You are a Mermaid.js diagram editor.
-
+			contents: `You are a Mermaid.js diagram editor.
 - Your task is to update the given Mermaid diagram ONLY based on the user's new instruction.
 - DO NOT regenerate the full diagram unless absolutely necessary.
 - Apply only the specific updates mentioned by the user (e.g., change text, color, add one node, rename label, etc).
-- Keep all other parts of the diagram unchanged.
+- Keep all other parts of the diagram unchanged including existing professional styling.
+- Maintain existing classDef definitions and color schemes.
 - Respond ONLY with a valid Mermaid.js code block — no explanation or extra text.
 
 Original Diagram:
@@ -99,8 +124,7 @@ ${originalDiagram}
 \`\`\`
 
 User Update Instruction:
-"${newPrompt}"
-      `,
+"${newPrompt}"`,
 		});
 
 		// 3. Extract the new diagram

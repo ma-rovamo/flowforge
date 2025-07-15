@@ -8,12 +8,12 @@ import { updateDiagram } from "@/lib/actions/gemin";
 import MermaidRenderer from "./gen/MermaidRenderer";
 import { cn } from "@/lib/utils";
 import { Textarea } from "./ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import Link from "next/link";
+import LoadingComponent from "./LoadingComponent";
 
 export default function DiagramEditor({ diagram }: { diagram: { id: string; prompt: string; diagram: string } }) {
   const [prompt, setPrompt] = useState(diagram.prompt);
-  const [response, setResponse] = useState(diagram.diagram);
+  const [response, setResponse] = useState<string | undefined>(diagram.diagram);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'input' | 'output'>('input');
@@ -101,7 +101,7 @@ export default function DiagramEditor({ diagram }: { diagram: { id: string; prom
               <div className="min-w-0">
                 <Link href="/" className="flex items-center gap-2">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-                  Diagram Studio
+                 Forge Flow
                 </h2>
                 </Link>
                 <p className="text-sm text-slate-500 dark:text-slate-400">
@@ -296,10 +296,7 @@ export default function DiagramEditor({ diagram }: { diagram: { id: string; prom
 <div className=" flex flex-col ">
   <div className="flex-1 overflow-auto  mb-16  min-h-[300px]">
     {loading ? (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-lg text-center text-muted-foreground">Creating your diagram...</p>
-        <Loader2 className="animate-spin w-6 h-6 ml-2" />
-      </div>
+      <LoadingComponent/>
     ) : response ? (
       <MermaidRenderer response={response} />
     ) : (

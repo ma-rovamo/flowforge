@@ -8,6 +8,7 @@ import MermaidRenderer from "./MermaidRenderer";
 import { Loader2, Send, Sparkles, RefreshCw } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { useRouter } from "next/navigation";
+import LoadingComponent from "../LoadingComponent";
 
 const FormCard = () => {
 	const router = useRouter();
@@ -55,6 +56,7 @@ const FormCard = () => {
 	};
 
 	return (
+		
 		<div className="w-full max-w-4xl mx-auto px-4 py-8">
 			<div className="space-y-8">
 				{/* <div className="text-center space-y-2">
@@ -70,7 +72,8 @@ const FormCard = () => {
 				{/* Results */}
 				{/* {response && <MermaidRenderer response={response} />} */}
 				{/* Input Form */}
-				<div>
+				{isLoading? <LoadingComponent/>:(
+					<div>
 					<form onSubmit={handleSubmit} className="p-4 space-y-4">
 						<div className="space-y-2">
 							<div className="relative">
@@ -165,6 +168,9 @@ const FormCard = () => {
 						</div>
 					</div>
 				</div>
+				)
+					
+				}
 			</div>
 		</div>
 	);

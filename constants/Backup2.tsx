@@ -118,84 +118,93 @@ export default function MermaidRenderer({ response, theme = 'light', title }: Pr
     }
   }, [renderedSvg]);
 
- const makeElementsDraggable = (svgElement: SVGElement) => {
-  const draggableElements = svgElement.querySelectorAll('.node, .edgePath, .cluster');
+  const makeElementsDraggable = (svgElement: SVGElement) => {
+    const draggableElements = svgElement.querySelectorAll('.node, .edgePath, .cluster');
+    
+    draggableElements.forEach((element) => {
+      const el = element as SVGElement;
+      let isDraggingElement = false;
+      let startX = 0;
+      let startY = 0;
+      let initialTransform = '';
+      let elementStartX = 0;
+      let elementStartY = 0;
 
-  draggableElements.forEach((element) => {
-    const el = element as SVGElement;
-    let isDraggingElement = false;
-    let startX = 0;
-    let startY = 0;
-    let initialTransform = '';
-    let elementStartX = 0;
-    let elementStartY = 0;
-
-    // Store original transform for reset functionality
-    if (!el.getAttribute('data-original-transform')) {
-      el.setAttribute('data-original-transform', el.getAttribute('transform') || '');
-    }
-
-    const handleElementMouseDown = (e: MouseEvent) => {
-      e.stopPropagation();
-      e.preventDefault();
-      isDraggingElement = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      initialTransform = el.getAttribute('transform') || '';
-
-      // Parse current position
-      const transformMatch = initialTransform.match(/translate\(([^)]+)\)/);
-      if (transformMatch) {
-        const coords = transformMatch[1].split(',').map(s => parseFloat(s.trim()));
-        elementStartX = coords[0] || 0;
-        elementStartY = coords[1] || 0;
-      } else {
-        elementStartX = 0;
-        elementStartY = 0;
+      // Store original transform for reset functionality
+      if (!el.getAttribute('data-original-transform')) {
+        el.setAttribute('data-original-transform', el.getAttribute('transform') || '');
       }
 
-      el.style.cursor = 'grabbing';
-      el.style.userSelect = 'none';
-      document.addEventListener('mousemove', handleElementMouseMove);
-      document.addEventListener('mouseup', handleElementMouseUp);
-    };
+      const handleElementMouseDown = (e: MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        isDraggingElement = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        initialTransform = el.getAttribute('transform') || '';
+        
+        // Parse current position
+        const transformMatch = initialTransform.match(/translate\(([^)]+)\)/);
+        if (transformMatch) {
+          const coords = transformMatch[1].split(',').map(s => parseFloat(s.trim()));
+          elementStartX = coords[0] || 0;
+          elementStartY = coords[1] || 0;
+        } else {
+          elementStartX = 0;
+          elementStartY = 0;
+        }
+        
+        el.style.cursor = 'grabbing';
+        el.style.userSelect = 'none';
+        document.addEventListener('mousemove', handleElementMouseMove);
+        document.addEventListener('mouseup', handleElementMouseUp);
+      };
 
-    const handleElementMouseMove = (e: MouseEvent) => {
-      if (!isDraggingElement) return;
+      const handleElementMouseMove = (e: MouseEvent) => {
+        if (!isDraggingElement) return;
+        
+        const dx = (e.clientX - startX) / scale;
+        const dy = (e.clientY - startY) / scale;
+        
+        const newX = elementStartX + dx;
+        const newY = elementStartY + dy;
+        
+        // Get container boundaries for proper constraining
+        const containerRect = containerRef.current?.getBoundingClientRect();
+        if (!containerRect) return;
+        
+        // Apply much more generous boundaries (allow movement outside visible area)
+        const maxBoundary = Math.max(containerRect.width, containerRect.height) * 2;
+        const minBoundary = -maxBoundary;
+        
+        // Only constrain to prevent elements from going too far out
+        const clampedX = Math.max(minBoundary, Math.min(maxBoundary, newX));
+        const clampedY = Math.max(minBoundary, Math.min(maxBoundary, newY));
+        
+        // Apply new transform
+        let newTransform = initialTransform;
+        if (initialTransform.includes('translate(')) {
+          newTransform = initialTransform.replace(/translate\([^)]+\)/, `translate(${clampedX}, ${clampedY})`);
+        } else {
+          newTransform = `translate(${clampedX}, ${clampedY}) ${initialTransform}`;
+        }
+        
+        el.setAttribute('transform', newTransform);
+      };
 
-      const dx = (e.clientX - startX) / scale;
-      const dy = (e.clientY - startY) / scale;
+      const handleElementMouseUp = () => {
+        isDraggingElement = false;
+        el.style.cursor = 'grab';
+        el.style.userSelect = '';
+        document.removeEventListener('mousemove', handleElementMouseMove);
+        document.removeEventListener('mouseup', handleElementMouseUp);
+      };
 
-      const newX = elementStartX + dx;
-      const newY = elementStartY + dy;
-
-      // Removed clamping to allow free movement *anywhere*
-
-      // Apply new transform
-      let newTransform = initialTransform;
-      if (initialTransform.includes('translate(')) {
-        newTransform = initialTransform.replace(/translate\([^)]+\)/, `translate(${newX}, ${newY})`);
-      } else {
-        newTransform = `translate(${newX}, ${newY}) ${initialTransform}`;
-      }
-
-      el.setAttribute('transform', newTransform);
-    };
-
-    const handleElementMouseUp = () => {
-      isDraggingElement = false;
       el.style.cursor = 'grab';
-      el.style.userSelect = '';
-      document.removeEventListener('mousemove', handleElementMouseMove);
-      document.removeEventListener('mouseup', handleElementMouseUp);
-    };
-
-    el.style.cursor = 'grab';
-    el.style.userSelect = 'none';
-    el.addEventListener('mousedown', handleElementMouseDown);
-  });
-};
-
+      el.style.userSelect = 'none';
+      el.addEventListener('mousedown', handleElementMouseDown);
+    });
+  };
 
   const handleZoom = useCallback((delta: number) => {
     setScale(prev => {
@@ -260,7 +269,7 @@ export default function MermaidRenderer({ response, theme = 'light', title }: Pr
       // Get SVG dimensions
       const svgRect = svgElement.getBoundingClientRect();
       const svgWidth = svgElement.width?.baseVal?.value || svgElement.viewBox?.baseVal?.width || 800;
-      const svgHeight = svgElement.height?.baseVal?.value || svgElement.viewBox?.baseVal?.height || 800;
+      const svgHeight = svgElement.height?.baseVal?.value || svgElement.viewBox?.baseVal?.height || 600;
       
       // Clean up the SVG for better export
       const exportSvg = svgElement.cloneNode(true) as SVGElement;
@@ -463,8 +472,8 @@ export default function MermaidRenderer({ response, theme = 'light', title }: Pr
       const newY = e.clientY - dragStart.y;
       
       // Allow free movement with generous boundaries
-      const maxBoundary = 12000;
-      const minBoundary = -12000;
+      const maxBoundary = 2000;
+      const minBoundary = -2000;
       
       setPosition({
         x: Math.max(minBoundary, Math.min(maxBoundary, newX)),
@@ -482,14 +491,14 @@ export default function MermaidRenderer({ response, theme = 'light', title }: Pr
   }, []);
 
   return (
-    <div className={`mt-6 ${isFullscreen ? 'fixed inset-0 z-50' : 'rounded-xl'} shadow-lg overflow-hidden transition-all duration-300`}>
+    <div className={`mt-6 ${isFullscreen ? 'fixed inset-0 z-50' : 'rounded-xl border border-border'} shadow-lg overflow-hidden transition-all duration-300 bg-background`}>
       {/* Header */}
-      <div className=" p-4 ">
+      <div className="bg-muted/50 p-4 border-b border-border">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            {/* <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
             <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div> */}
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
             <h3 className="text-sm font-semibold text-foreground ml-4">
               {title || 'Diagram Preview'}
             </h3>
@@ -671,30 +680,29 @@ export default function MermaidRenderer({ response, theme = 'light', title }: Pr
           </div>
         )}
         
-       <div
-  ref={containerRef}
-  className={`relative w-full h-full ${isFullscreen ? 'fixed inset-0 z-50' : 'h-[600px]'}`}
-  style={{
-    overflow: 'visible', // allow dragging beyond container bounds
-    backgroundColor: 'var(--background)', // preserve background styling
-    padding: 0 // remove padding to maximize drag area
-  }}
->
-  <div
-    ref={mermaidRef}
-    className={`mermaid w-full h-full transition-all duration-300 ease-out origin-center ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
-    style={{
-      opacity: loading ? 0 : 1,
-      transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
-      transformOrigin: 'center center',
-    }}
-    onMouseDown={handleMouseDown}
-  />
-</div>
-
+        <div 
+          ref={containerRef}
+          className={`p-6 ${isFullscreen ? 'h-full flex items-center justify-center' : ''}`}
+        >
+          <div 
+            ref={mermaidRef}
+            className={`mermaid transition-all duration-300 ease-out origin-center max-w-full ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            style={{ 
+              opacity: loading ? 0 : 1,
+              transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+              transformOrigin: 'center center'
+            }}
+            onMouseDown={handleMouseDown}
+          />
+        </div>
       </div>
       
-    
+      {/* Instructions */}
+      <div className="bg-muted/30 px-4 py-2 border-t border-border">
+        <p className="text-xs text-muted-foreground text-center">
+          💡 Drag the diagram to move it around • Individual nodes and elements can be dragged • Use zoom controls for better view
+        </p>
+      </div>
     </div>
   );
 }
