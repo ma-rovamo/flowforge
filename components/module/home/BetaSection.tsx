@@ -60,7 +60,7 @@ const BetaSection = () => {
   ];
 
   return (
-    <div className="w-screen min-h-screen bg-gray-950 text-white">
+    <div className=" min-h-screen bg-gray-950 text-white">
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
@@ -110,7 +110,7 @@ const BetaSection = () => {
                   <Button 
                     variant="outline" 
                     size="lg"
-                    className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
+                    className="border-gray-700 text-gray-500 hover:bg-gray-800 hover:text-white"
                   >
                     Questions? Contact Us
                   </Button>
