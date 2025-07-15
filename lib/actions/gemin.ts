@@ -12,8 +12,8 @@ const genAI = new GoogleGenAI({ apiKey });
 export const generateContent = async (prompt: string) => {
 	try {
 		const response = await genAI.models.generateContent({
-			model: "gemini-2.5-flash",
-   contents: `You are a professional Mermaid.js diagram generator.
+			model: "gemini-2.0-flash-lite",
+			contents: `You are a professional Mermaid.js diagram generator.
 
 Your task:
 1. Interpret the user's prompt and generate a valid Mermaid.js diagram that clearly visualizes the described concept.
@@ -58,8 +58,8 @@ Formatting & Style Guidelines:
 
 Your response must be ONLY the Mermaid code block, and it should always be clean, valid, and professional-looking with appropriate colors and styling.
 
-Prompt: ${prompt}`
 
+Prompt: ${prompt}`,
 		});
 
 		const text = response.text as any;
