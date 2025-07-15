@@ -20,7 +20,7 @@ const FeaturesSection = () => {
       title: "Professional Styling",
       description: "Every diagram follows industry standards with consistent styling, proper symbols, and clear connections.",
       badge: "Design",
-      color: "indigo"
+      color: "violet"
     },
     {
       icon: Target,
@@ -41,7 +41,7 @@ const FeaturesSection = () => {
       title: "Diagram History",
       description: "Access previous versions of your diagrams and track the evolution of your design process.",
       badge: "Organization",
-      color: "indigo"
+      color: "white"
     },
     {
       icon: Users,
@@ -66,7 +66,7 @@ const FeaturesSection = () => {
               <span className="text-blue-400 text-sm font-medium">Powerful Features</span>
             </div>
             
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight">
+            <h2 className="text-5xl md:text-6xl text-white lg:text-7xl font-bold mb-8 tracking-tight">
               Everything You Need to
               <br />
               <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
