@@ -18,5 +18,3 @@ export default function Home() {
 		</>
 	);
 }
-
-// https://github.com/muhammadunain/diagrams.git
