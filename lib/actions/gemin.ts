@@ -12,7 +12,7 @@ const genAI = new GoogleGenAI({ apiKey });
 export const generateContent = async (prompt: string) => {
 	try {
 		const response = await genAI.models.generateContent({
-			model: "gemini-2.0-flash-lite",
+			model: "gemini-2.5-flash",
 			contents: `You are a professional Mermaid.js diagram generator.
 
 Your task:

@@ -20,7 +20,7 @@ const FeaturesSection = () => {
       title: "Professional Styling",
       description: "Every diagram follows industry standards with consistent styling, proper symbols, and clear connections.",
       badge: "Design",
-      color: "violet"
+      color: "blue"
     },
     {
       icon: Target,
@@ -41,7 +41,7 @@ const FeaturesSection = () => {
       title: "Diagram History",
       description: "Access previous versions of your diagrams and track the evolution of your design process.",
       badge: "Organization",
-      color: "white"
+      color: "purple"
     },
     {
       icon: Users,
@@ -95,7 +95,7 @@ const FeaturesSection = () => {
                 <div className="relative p-8">
                   <div className="flex items-start justify-between mb-6">
                     <div className={`p-4 bg-gradient-to-br from-${feature.color}-500/20 to-${feature.color}-600/20 rounded-2xl border border-${feature.color}-500/30 group-hover:scale-110 transition-transform duration-300`}>
-                      <feature.icon className={`h-7 w-7 text-${feature.color}-400`} />
+                      <feature.icon className={`h-7 w-7 text-${feature.color}-400 `} />
                     </div>
                     <Badge 
                       variant="outline" 

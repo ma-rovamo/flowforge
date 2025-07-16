@@ -18,6 +18,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { Hero } from "./ui/animated-hero";
+import Link from "next/link";
 // Utility function for className merging
 function cn(...classes: (string | undefined | null | boolean)[]): string {
   return classes.filter(Boolean).join(' ');
@@ -104,7 +105,7 @@ const mockMessages = [
 const mockFlowchartNodes = [
   { id: 1, label: 'Start', type: 'start', x: 50, y: 20 },
   { id: 2, label: 'User Input', type: 'process', x: 50, y: 40 },
-  { id: 3, label: 'Valid Email?', type: 'decision', x: 50, y: 60 },
+  { id: 3, label: ' Email?', type: 'decision', x: 50, y: 60 },
   { id: 4, label: 'Send Verification', type: 'process', x: 80, y: 80 },
   { id: 5, label: 'Show Error', type: 'process', x: 20, y: 80 }
 ];
@@ -248,22 +249,24 @@ const HeroSection: React.FC = () => {
             transition={{ delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
+            <Link href={'/diagrams'} >
             <Button 
               size="lg" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
+  className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
               onClick={handleStartDemo}
-            >
-              Join Beta Program
+              >
+              Join Beta Forge Flow
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
-            <Button 
+              </Link>
+            {/* <Button 
               variant="outline" 
               size="lg"
               className="border-gray-600 text-gray-300 hover:bg-gray-800 px-8 py-3 text-lg"
             >
               <Play className="w-5 h-5 mr-2" />
               Watch Demo
-            </Button>
+            </Button> */}
           </motion.div>
         </AnimatedGroup>
 
@@ -284,8 +287,8 @@ const HeroSection: React.FC = () => {
                       <Bot className="w-4 h-4" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">AI Assistant</h3>
-                      <p className="text-sm text-gray-400">Ready to help</p>
+                      <h3 className="font-semibold text-white">AI Assistant</h3>
+                      <p className="text-sm text-gray-500">Ready to help</p>
                     </div>
                     <div className="ml-auto flex gap-1">
                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
@@ -348,7 +351,7 @@ const HeroSection: React.FC = () => {
                 {/* Flowchart Visualization */}
                 <Card className="p-6 bg-gray-900/70 border-gray-700 backdrop-blur-xl">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="font-semibold">Generated Flowchart</h3>
+                    <h3 className="font-semibold text-white">Generated Flowchart</h3>
                     <div className="flex gap-2">
                       <Button variant="ghost" size="sm">
                         <ImageIcon className="w-4 h-4" />
@@ -437,9 +440,9 @@ const HeroSection: React.FC = () => {
                           )}
                           {node.type === 'process' && (
                             <rect
-                              x={node.x * 4 - 40}
+                              x={node.x * 3.8 - 40}
                               y={node.y * 3 - 20}
-                              width="80"
+                              width="110"
                               height="40"
                               rx="4"
                               fill="#1f2937"

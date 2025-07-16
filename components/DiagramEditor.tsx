@@ -267,7 +267,7 @@ export default function DiagramEditor({ diagram }: { diagram: { id: string; prom
               <Button
                 onClick={handleUpdate}
                 disabled={loading || !prompt.trim()}
-                className="w-full"
+                className="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white"
               >
                 {loading ? (
                   <>

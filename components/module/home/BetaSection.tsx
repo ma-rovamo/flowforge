@@ -243,26 +243,30 @@ const BetaSection = () => {
             </div>
 
             {/* Final CTA */}
-            <div className="mt-20 text-center">
-              <Card className="p-12 bg-gradient-to-r from-blue-900/20 via-blue-800/10 to-blue-900/20 border border-blue-900/30">
-                <h3 className="text-3xl font-bold mb-4 text-white">
-                  Ready to Transform Your Workflow?
-                </h3>
-                <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                  Join the beta program today and experience the future of flowchart creation
-                </p>
-                <Button 
-                  size="lg" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg"
-                >
-                  Start Creating Now
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <p className="text-sm text-gray-400 mt-4">
-                  No commitment required • Full access during beta
-                </p>
-              </Card>
-            </div>
+           <div className="mt-20 text-center">
+  <Card className="p-12 bg-gradient-to-r from-blue-900/20 via-blue-800/10 to-blue-900/20 border border-blue-900/30">
+    <h3 className="text-3xl font-bold mb-4 text-white">
+      Ready to Transform Your Workflow?
+    </h3>
+    <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+      Join the beta program today and experience the future of flowchart creation
+    </p>
+
+    <div className="flex justify-center">
+      <Button
+        className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg"
+      >
+        Start Creating Now
+        <ArrowRight className="ml-2 h-5 w-5" />
+      </Button>
+    </div>
+
+    <p className="text-sm text-gray-400 mt-4">
+      No commitment required • Full access during beta
+    </p>
+  </Card>
+</div>
+
           </div>
         </div>
       </section>

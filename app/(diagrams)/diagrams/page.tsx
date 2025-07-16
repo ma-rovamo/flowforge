@@ -14,10 +14,10 @@ const page = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <span className="text-lg font-semibold text-gray-900">ChartGen</span>
+              <span className="text-lg font-semibold text-gray-900">Forge  Chart Generator</span>
             </div>
             <div className="flex items-center gap-6">
-              <span className="text-sm text-gray-600">Forge  Chart Generator</span>
+              <span className="text-sm text-gray-600">Instantly turn text prompts into beautiful flowcharts</span>
             </div>
           </div>
         </div>
@@ -29,12 +29,13 @@ const page = () => {
         {/* Header section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
-            Generate Professional
-            <span className="text-blue-600"> Mermaid Charts</span>
-          </h1>
+  Turn Prompts into
+  <span className="text-blue-600"> Visual Flowcharts</span>
+</h1>
+
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Create beautiful diagrams and flowcharts with our intuitive form-based generator. 
-            Perfect for documentation, presentations, and system design.
+            Turn your ideas into clear, elegant diagrams with just a text prompt.
+  Ideal for teams, developers, and creators who need fast visual clarity.
           </p>
           
           {/* Feature badges */}
@@ -67,8 +68,8 @@ const page = () => {
             <div className="border-b border-gray-100 bg-gray-50 px-8 py-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-semibold text-gray-900">Chart Configuration</h2>
-                  <p className="text-sm text-gray-600 mt-1">Fill in the details to generate your Mermaid diagram</p>
+<h2 className="text-xl font-semibold text-gray-900">Use Forge to Shape Your Visual Logic</h2>
+<p className="text-sm text-gray-600 mt-1">Describe what you want to visualize — we’ll do the rest</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>

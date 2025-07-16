@@ -74,100 +74,101 @@ const FormCard = () => {
 				{/* Input Form */}
 				{isLoading? <LoadingComponent/>:(
 					<div>
-					<form onSubmit={handleSubmit} className="p-4 space-y-4">
-						<div className="space-y-2">
-							<div className="relative">
-								<Textarea
-									id="prompt"
-									className="w-full pr-10 min-h-[100px] resize-y"
-									onChange={(e) => setPrompt(e.target.value)}
-									value={prompt}
-									placeholder="e.g., A flowchart showing the user authentication process"
-									name="text"
-									autoComplete="off"
-									disabled={isLoading}
-									style={{ height: "100px" }}
-								/>
-								{prompt && (
-									<button
-										type="button"
-										onClick={handleClear}
-										className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-										aria-label="Clear input">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="16"
-											height="16"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											strokeWidth="2"
-											strokeLinecap="round"
-											strokeLinejoin="round">
-											<line x1="18" y1="6" x2="6" y2="18"></line>
-											<line x1="6" y1="6" x2="18" y2="18"></line>
-										</svg>
-									</button>
-								)}
-							</div>
-						</div>
+	<form onSubmit={handleSubmit} className="p-6 space-y-6 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl  border border-gray-200 dark:border-gray-700">
+		<div className="space-y-3">
+			<div className="relative group">
+				<Textarea
+					id="prompt"
+					className="w-full pr-12 min-h-[120px] resize-y text-base leading-relaxed border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-purple-500/20 focus:border-purple-500 hover:border-purple-300 dark:hover:border-purple-600 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 placeholder-gray-400 dark:placeholder-gray-500"
+					onChange={(e) => setPrompt(e.target.value)}
+					value={prompt}
+					placeholder="✨ Describe your diagram idea... e.g., A flowchart showing the user authentication process"
+					name="text"
+					autoComplete="off"
+					disabled={isLoading}
+					style={{ height: "120px" }}
+				/>
+				{prompt && (
+					<button
+						type="button"
+						onClick={handleClear}
+						className="absolute right-3 top-3 p-2 rounded-full text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 transform hover:scale-110"
+						aria-label="Clear input">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round">
+							<line x1="18" y1="6" x2="6" y2="18"></line>
+							<line x1="6" y1="6" x2="18" y2="18"></line>
+						</svg>
+					</button>
+				)}
+			</div>
+		</div>
 
-						{error && (
-							<div className="p-3 text-sm bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 rounded-md">
-								{error}
-							</div>
-						)}
+		{error && (
+			<div className="p-4 text-sm bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-900/20 border-2 border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 rounded-xl shadow-lg">
+				{error}
+			</div>
+		)}
 
-						<div className="flex flex-col sm:flex-row gap-3 pt-2">
-							<Button
-								type="submit"
-								className="flex-1 gap-2"
-								disabled={isLoading || !prompt.trim()}>
-								{isLoading ? (
-									<>
-										<Loader2 className="h-4 w-4 animate-spin" />
-										Generating...
-									</>
-								) : (
-									<>
-										<Sparkles className="h-4 w-4" />
-										Generate Diagram
-									</>
-								)}
-							</Button>
-							<Button
-								type="button"
-								variant="outline"
-								onClick={handleClear}
-								disabled={isLoading || (!prompt && !response)}>
-								<RefreshCw className="h-4 w-4 mr-2" />
-								Reset
-							</Button>
-						</div>
-					</form>
+		<div className="flex flex-col sm:flex-row gap-4 pt-2">
+			<Button
+				type="submit"
+				className="flex-1 gap-2 px-6 py-3 text-base font-semibold bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-xl hover:shadow-2xl rounded-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
+				disabled={isLoading || !prompt.trim()}>
+				{isLoading ? (
+					<>
+						<Loader2 className="h-5 w-5 animate-spin" />
+						Generating...
+					</>
+				) : (
+					<>
+						<Sparkles className="h-5 w-5" />
+						Generate Diagram
+					</>
+				)}
+			</Button>
+			<Button
+				type="button"
+				variant="outline"
+				onClick={handleClear}
+				className="px-6 py-3 text-base font-medium border-2 border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 text-gray-700 dark:text-gray-200 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 dark:hover:from-purple-950 dark:hover:to-blue-950 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
+				disabled={isLoading || (!prompt && !response)}>
+				<RefreshCw className="h-5 w-5 mr-2" />
+				Reset
+			</Button>
+		</div>
+	</form>
 
-					{/* Example prompts */}
-					<div className="px-4 pb-4">
-						<p className="text-xs text-muted-foreground mb-2">
-							Try these examples:
-						</p>
-						<div className="flex flex-wrap gap-2">
-							{[
-								"A flowchart showing user registration process",
-								"Sequence diagram of API authentication",
-								"Entity relationship diagram for a blog database",
-								"State diagram for a shopping cart checkout",
-							].map((example, i) => (
-								<button
-									key={i}
-									onClick={() => handleExamplePrompt(example)}
-									className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-									{example}
-								</button>
-							))}
-						</div>
-					</div>
-				</div>
+	{/* Example prompts */}
+	<div className="px-6 pb-6">
+		<p className="text-sm text-muted-foreground mb-3 font-medium">
+			✨ Try these examples:
+		</p>
+		<div className="flex flex-wrap gap-3">
+			{[
+				"A flowchart showing user registration process",
+				"Sequence diagram of API authentication",
+				"Entity relationship diagram for a blog database",
+				"State diagram for a shopping cart checkout",
+			].map((example, i) => (
+				<button
+					key={i}
+					onClick={() => handleExamplePrompt(example)}
+					className="text-sm px-4 py-2 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 hover:from-purple-100 hover:to-blue-100 dark:hover:from-purple-900 dark:hover:to-blue-900 transition-all duration-300 shadow-md hover:shadow-lg border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600">
+					{example}
+				</button>
+			))}
+		</div>
+	</div>
+</div>
 				)
 					
 				}
