@@ -5,6 +5,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Zap, Target, Users, Download, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const FeaturesSection = () => {
   const features = [
@@ -127,12 +128,12 @@ const FeaturesSection = () => {
 
           {/* Call to action */}
           <div className="text-center mt-20">
-            <div className="inline-flex items-center gap-4 p-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-2xl shadow-blue-500/25">
+            <div className="inline-flex items-center gap-4 p-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-2xl cursor-pointer shadow-blue-500/25">
               <Sparkles className="h-6 w-6 text-white animate-pulse" />
               <span className="text-white font-semibold text-lg">Ready to get started?</span>
-              <button className="px-6 py-2 bg-white text-gray-900 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              <Button className="px-6 py-2 cursor-pointer bg-white text-gray-900 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                 Try Flow Forge
-              </button>
+              </Button>
             </div>
           </div>
         </div>

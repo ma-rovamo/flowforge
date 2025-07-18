@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, Sparkles } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 
@@ -61,10 +61,12 @@ export default function MainHeader() {
 				<div className="md:flex items-center justify-center gap-4 sm:block hidden">
 					{/* <UserDropDown /> */}
 						<Link
-						href="/diagrams"
-						className="text-sm text-gray-100 dark:text-white font-medium cursor-pointer">
-						Generate
-					</Link> 
+  href="/diagrams"
+  className="inline-flex items-center gap-1 p-3 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-2xl shadow-blue-500/25">
+  <Sparkles className="h-4 w-4 text-white animate-pulse" />
+  Generate
+</Link>
+
 				</div>
 				<Sheet >
 					<SheetTrigger  asChild>

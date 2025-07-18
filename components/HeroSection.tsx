@@ -252,7 +252,7 @@ const HeroSection: React.FC = () => {
             <Link href={'/diagrams'} >
             <Button 
               size="lg" 
-  className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+  className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-all duration-300"
               onClick={handleStartDemo}
               >
               Join Beta Forge Flow

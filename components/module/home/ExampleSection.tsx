@@ -117,7 +117,7 @@ const ExamplesSection = () => {
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="border-gray-700 text-gray-100 group-hover:border-blue-500 bg-blue-500 group-hover:text-blue-400 transition-colors"
+                      className="border-gray-700 cursor-pointer text-gray-100 group-hover:border-blue-500 bg-blue-500 group-hover:text-blue-400 transition-colors"
                     >
                       Try This Example
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -137,7 +137,7 @@ const ExamplesSection = () => {
               <p className="text-gray-400 mb-4">
                 Join our beta program and explore dozens of real-world flowchart templates
               </p>
-              <Button variant="hero" className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Button variant="hero" className="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer">
                 Explore Full Library
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

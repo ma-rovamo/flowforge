@@ -102,7 +102,7 @@ const BetaSection = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     size="lg" 
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+                    className="flex-1 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white"
                   >
                     Get Beta Access Now
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -110,7 +110,7 @@ const BetaSection = () => {
                   <Button 
                     variant="outline" 
                     size="lg"
-                    className="border-gray-700 text-gray-500 hover:bg-gray-800 hover:text-white"
+                    className="border-gray-700 cursor-pointer text-gray-500 hover:bg-gray-800 hover:text-white"
                   >
                     Questions? Contact Us
                   </Button>
@@ -199,8 +199,8 @@ const BetaSection = () => {
                 </p>
               </div>
 
-              <Card className="bg-gray-900 border border-gray-800 overflow-hidden">
-                <Accordion type="single" collapsible className="w-full">
+              <Card className="bg-gray-900 border border-gray-800 cursor-pointer overflow-hidden ">
+                <Accordion type="single" collapsible className="w-full cursor-pointer">
                   {faqs.map((faq, index) => (
                     <AccordionItem key={index} value={`item-${index}`} className="border-gray-800">
                       <AccordionTrigger className="px-8 py-6 text-left text-white hover:text-blue-300 hover:no-underline">
@@ -254,7 +254,7 @@ const BetaSection = () => {
 
     <div className="flex justify-center">
       <Button
-        className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg"
+        className="w-full sm:w-auto cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg"
       >
         Start Creating Now
         <ArrowRight className="ml-2 h-5 w-5" />
