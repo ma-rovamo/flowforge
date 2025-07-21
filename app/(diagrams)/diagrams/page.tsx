@@ -1,6 +1,6 @@
 import FormCard from '@/components/gen/FormCard'
 import React from 'react'
-
+export const dynamic = "force-dynamic";
 const page = () => {
   return (
     <div className="min-h-screen bg-white">
