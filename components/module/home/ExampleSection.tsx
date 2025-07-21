@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Code, ArrowRight, FileText, Users, GitBranch, Database, Server, ShieldCheck } from "lucide-react";
+import Link from "next/link";
 
 const ExamplesSection = () => {
   const examples = [
@@ -82,7 +83,7 @@ const ExamplesSection = () => {
             {examples.map((example, index) => (
               <Card 
                 key={index} 
-                className="group overflow-hidden bg-gray-900 border border-gray-800 hover:border-blue-900/30 hover:shadow-blue-900/20 transition-all duration-500"
+                className=" overflow-hidden bg-gray-900 border border-gray-800 hover:border-blue-900/30 hover:shadow-blue-900/20 transition-all duration-500"
               >
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
@@ -114,14 +115,15 @@ const ExamplesSection = () => {
                   </p>
 
                   <div className="flex items-center justify-between">
+                    <Link href={`/diagrams/?prompt=${example.prompt}`}>
                     <Button 
-                      variant="outline" 
                       size="sm" 
                       className="border-gray-700 cursor-pointer text-gray-100 group-hover:border-blue-500 bg-blue-500 group-hover:text-blue-400 transition-colors"
-                    >
+                      >
                       Try This Example
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
+                      </Link>
                     <span className="text-sm text-gray-500">~2 min to create</span>
                   </div>
                 </div>

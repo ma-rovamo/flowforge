@@ -9,6 +9,7 @@ import { Loader2, Send, Sparkles, RefreshCw } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { useRouter } from "next/navigation";
 import LoadingComponent from "../LoadingComponent";
+import { useSearchParams } from 'next/navigation'
 
 const FormCard = () => {
 	const router = useRouter();
@@ -16,6 +17,14 @@ const FormCard = () => {
 	const [response, setResponse] = React.useState<any | string>("");
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [error, setError] = React.useState<string | null>(null);
+	const searchParams = useSearchParams()
+
+	const params = searchParams.get('prompt') as any
+	React.useEffect(() => {
+	if (params && !prompt) {
+		setPrompt(params);
+	}
+}, [params]);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
