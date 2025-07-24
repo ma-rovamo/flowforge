@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import mermaid from 'mermaid';
+import { toast } from 'sonner';
 
 type Props = {
   response: string | any;
@@ -239,6 +240,7 @@ export default function MermaidRenderer({ response, theme = 'light', title }: Pr
       downloadLink.click();
       document.body.removeChild(downloadLink);
       URL.revokeObjectURL(svgUrl);
+      toast.success('SVG downloaded successfully');
     }
   }, [renderedSvg, title]);
 
@@ -426,6 +428,7 @@ export default function MermaidRenderer({ response, theme = 'light', title }: Pr
     try {
       await navigator.clipboard.writeText(response);
       console.log('Diagram source copied to clipboard');
+      toast.success('Diagram source copied to clipboard');
     } catch (err) {
       console.error('Failed to copy to clipboard:', err);
     }
@@ -435,6 +438,7 @@ export default function MermaidRenderer({ response, theme = 'light', title }: Pr
     try {
       if (renderedSvg) {
         await navigator.clipboard.writeText(renderedSvg);
+        toast.success('SVG code copied to clipboard');
         console.log('SVG code copied to clipboard');
       }
     } catch (err) {

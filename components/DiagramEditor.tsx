@@ -12,7 +12,8 @@ import Link from "next/link";
 import LoadingComponent from "./LoadingComponent";
 
 export default function DiagramEditor({ diagram }: { diagram: { id: string; prompt: string; diagram: string } }) {
-  const [prompt, setPrompt] = useState(diagram.prompt);
+  // const [prompt, setPrompt] = useState(diagram.prompt);
+  const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState<string | undefined>(diagram.diagram);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +44,8 @@ export default function DiagramEditor({ diagram }: { diagram: { id: string; prom
 
     if (res.success) {
       setResponse(res.data?.diagram);
-      setActiveTab('output');
+      setActiveTab('input');
+      setPrompt('')
       if (isMobile) {
         setMobileMenuOpen(false);
       }
