@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Workflow, Zap, Users, Layers } from 'lucide-react';
 import FormCardTest from '@/components/gen/FlowTestCard';
 import Link from 'next/link';
@@ -81,7 +81,9 @@ const page = () => {
 
       {/* Main Form Section */}
       <div className="relative">
+         <Suspense fallback={<div className="p-6 text-center">Loading form...</div>}>
         <FormCardTest />
+      </Suspense>
       </div>
 
       {/* Features Section */}
@@ -194,3 +196,4 @@ const page = () => {
 };
 
 export default page;
+
