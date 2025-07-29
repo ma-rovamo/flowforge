@@ -76,3 +76,10 @@ export const diagrams = pgTable("diagrams", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+export const flow = pgTable("flow", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  prompt: text("prompt").notNull(),
+  diagram: text("diagram").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
