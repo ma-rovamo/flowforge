@@ -494,9 +494,9 @@ export default function MermaidRenderer({ response, theme = 'light', title }: Pr
             {/* <div className="w-3 h-3 bg-red-500 rounded-full"></div>
             <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
             <div className="w-3 h-3 bg-green-500 rounded-full"></div> */}
-            <h3 className="text-sm font-semibold text-foreground ml-4">
+            {/* <h3 className="text-sm font-semibold text-foreground ml-4">
               {title || 'Diagram Preview'}
-            </h3>
+            </h3> */}
           </div>
           
           <div className="flex items-center space-x-1">
